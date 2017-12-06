@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import {getRecommend} from 'api/recommend'
+  import {getRecommend, getDiscList} from 'api/recommend'
   import {ERR_OK} from 'api/config'
   import Slider from 'base/slider/slider'
 
@@ -34,13 +34,24 @@
       Slider
     },
     created() {
+      // console.log(getDiscList)
       this._getRecommend()
+      this._getDiscList()
     },
     methods: {
+      _getDiscList() {
+        // console.log(111)
+        getDiscList().then(res => {
+          console.log('嘿嘿', res)
+          // if (res.code === ERR_OK) {
+          //   console.log(res.data.list)
+          // }
+        })
+      },
       _getRecommend() {
-        getRecommend().then(res => {
+        getRecommend().then((res) => {
+          console.log(res)
           if (res.code === ERR_OK) {
-            console.log(res.data.slider)
             this.recommends = res.data.slider
           }
         })
