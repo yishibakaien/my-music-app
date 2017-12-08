@@ -86,7 +86,7 @@
           snapThreshold: 0.3,
           snapSpeed: 400
         })
-        console.log('初始', this.slider.getCurrentPage().pageX)
+        // console.log('初始', this.slider.getCurrentPage().pageX)
 
         this.slider.on('scrollEnd', () => {
           let pageIndex = this.slider.getCurrentPage().pageX
@@ -94,7 +94,7 @@
             // 因为循环模式会在 slider 前后各 clone 一个slider
             pageIndex -= 1
           }
-          console.log('scrollEnd的pageIndex', pageIndex)
+          // console.log('scrollEnd的pageIndex', pageIndex)
           this.currentPageIndex = pageIndex
 
           if (this.autoPlay) {
@@ -108,12 +108,12 @@
       },
       _play() {
         let pageIndex = this.currentPageIndex + 1
-        console.log('_play()时pageIndex', pageIndex)
+        // console.log('_play()时pageIndex', pageIndex)
         if (this.loop) {
           pageIndex += 1
         }
         this.timer = setTimeout(() => {
-          console.log('goto的pageIndex', pageIndex)
+          // console.log('goto的pageIndex', pageIndex)
           this.slider.goToPage(pageIndex, 0, 400)
         }, this.interval)
       }

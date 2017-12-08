@@ -25,22 +25,25 @@ var app = express()
 
 var apiRoutes = express.Router()
 
-apiRoutes.get('/getDiscList', function (req, res) {
-  // res.json({a: 123})
-  // var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
-  var url = 'https://api.ts57.cn/front/user/checkPhone'
-  axios.get(url, {
-    headers: {
-      referer: 'https://c.y.qq.com/',
-      host: 'c.y.qq.com'
-    },
-    params: req.query
-  }).then((response) => {
-    res.json(response)
-  }).catch((e) => {
-    console.log(e)
-  })
-})
+/**
+ * 无效，已移至 proxyTable 跨域请求代理
+ */
+// apiRoutes.get('/getDiscList', function (req, res) {
+//   // res.json({a: 123})
+//   // var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
+//   var url = 'https://api.ts57.cn/front/user/checkPhone'
+//   axios.get(url, {
+//     headers: {
+//       referer: 'https://c.y.qq.com/',
+//       host: 'c.y.qq.com'
+//     },
+//     params: req.query
+//   }).then((response) => {
+//     res.json(response)
+//   }).catch((e) => {
+//     console.log(e)
+//   })
+// })
 
 apiRoutes.get('/lyric', function (req, res) {
   var url = 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'
