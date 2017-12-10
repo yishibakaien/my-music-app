@@ -19,7 +19,7 @@
     <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove">
       <ul>
         <li class="item" v-for="(item, index) in shortcutList" :data-index="index">
-          {{item}}
+          {{item}} 
         </li>
       </ul>
     </div>
