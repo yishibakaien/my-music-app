@@ -27,7 +27,7 @@
 </template>
 <script>
   import Scroll from 'base/scroll/scroll'
-  import {getData} from 'common/js/dom'
+  import { getData } from 'common/js/dom'
 
   // 右侧锚点格子的高度，通过 css 定义
   const ANCHOR_HEIGHT = 18
