@@ -3,6 +3,7 @@
           :data="data" 
           ref="listview"
           :listenScroll="listenScroll"
+          :probeType="probeType"
           @scroll="scroll"
   >
     <ul>
@@ -18,7 +19,10 @@
     </ul>
     <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove">
       <ul>
-        <li class="item" v-for="(item, index) in shortcutList" :data-index="index">
+        <li class="item" v-for="(item, index) in shortcutList" 
+          :data-index="index" 
+          :class="{current: currentIndex === index}"
+        >
           {{item}} 
         </li>
       </ul>
@@ -58,6 +62,8 @@
        */
       this.touch = {}
       this.listenScroll = true
+      this.listHeight = []
+      this.probeType = 3
     },
     computed: {
       shortcutList () {
@@ -75,7 +81,7 @@
         // 记录 touchstart 点击的锚点
         this.touch.anchorIndex = anchorIndex
 
-        this._scollTo(anchorIndex)
+        this._scrollTo(anchorIndex)
       },
       onShortcutTouchMove(e) {
         let firstTouch = e.touches[0]
@@ -86,12 +92,13 @@
         // 得到 thouchmove 后的 锚点
         let anchorIndex = parseInt(this.touch.anchorIndex) + delta
 
-        this._scollTo(anchorIndex)
+        this._scrollTo(anchorIndex)
       },
       scroll(pos) {
         this.scrollY = pos.y
       },
-      _scollTo(index) {
+      _scrollTo(index) {
+        this.scrollY = -this.listHeight[index]
         this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
       },
       _calculateHeight() {
@@ -99,6 +106,7 @@
         const list = this.$refs.listGroup
         let height = 0
         this.listHeight.push(height)
+        // console.log(this.listHeight)
         for (let i = 0; i < list.length; i++) {
           let item = list[i]
           height += item.clientHeight
@@ -108,6 +116,7 @@
     },
     watch: {
       data() {
+        // 数据的变换到 DOM 的变化有一个延迟，所以这里要等 DOM 变化完成后再进行操作
         setTimeout(() => {
           this._calculateHeight()
         }, 20)
@@ -120,7 +129,7 @@
           // -newY 因为 向上滚动时 Y 值是个负值 height 的计算全都是正值
           if (!height2 || (-newY > height1 && -newY < height2)) {
             this.currentIndex = i
-            console.log(this.currentIndex)
+            // console.log(this.currentIndex)
             return
           }
         }
