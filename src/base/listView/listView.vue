@@ -19,7 +19,8 @@
     </ul>
     <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove">
       <ul>
-        <li class="item" v-for="(item, index) in shortcutList" 
+        <li class="item" 
+          v-for="(item, index) in shortcutList" 
           :data-index="index" 
           :class="{current: currentIndex === index}"
         >
